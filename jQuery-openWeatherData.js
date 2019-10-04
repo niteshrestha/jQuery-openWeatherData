@@ -20,22 +20,42 @@
                 let lat = position.coords.latitude;
                 let lon = position.coords.longitude;
                 let apiURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + config.apiKey + "&units=metric";
+                let raw = '';
 
                 $.post(apiURL,
                     function (result) {
-                        let raw = "<div class='row'><div class='col' style='font-size: " + config.titleFontSize + "px'>Weather for " + result["name"] + "</div></div>"
-                            + "<div class='row align-items-center'><div class='col-auto' style='font-size:" + config.tempFontSize + "px'><img src='https://openweathermap.org/img/wn/"
-                            + result["weather"][0]["icon"] + "@2x.png'>"
-                            + result["main"]["temp"]
-                            + "°C</div></div><table class='table table-bordered table-striped' style='font-size: " + config.dataFontSize + "px'><tbody><tr><td>Wind</td><td>"
-                            + result["wind"]["speed"]
-                            + " m/s</td></tr><tr><td>Cloud</td><td>"
-                            + result["weather"][0]["description"]
-                            + "</td></tr><tr><td>Pressure</td><td>"
-                            + result["main"]["pressure"]
-                            + " hpa</td></tr><tr><td>Humidity</td><td>"
-                            + result["main"]["humidity"]
-                            + "%</td></tr></tbody></table>";
+                        raw += "<div class='row'>";
+                        raw += "<div class='col' style='font-size: " + config.titleFontSize + "px'>";
+                        raw += "Weather for " + result["name"];
+                        raw += "</div>";
+                        raw += "</div>";
+                        raw += "<div class='row align-items-center'>";
+                        raw += "<div class='col-auto' style='font-size:" + config.tempFontSize + "px'>";
+                        raw += "<img src='https://openweathermap.org/img/wn/" + result["weather"][0]["icon"] + "@2x.png'>";
+                        raw += result["main"]["temp"] + "°C";
+                        raw += "</div>";
+                        raw += "</div>";
+                        raw += "<table class='table table-bordered table-striped' style='font-size: " + config.dataFontSize + "px'>";
+                        raw += "<tbody>";
+                        raw += "<tr>";
+                        raw += "<td>Wind</td>";
+                        raw += "<td>" + result["wind"]["speed"] + " m/s</td>";
+                        raw += "</tr>";
+                        raw += "<tr>";
+                        raw += "<td>Cloud</td>";
+                        raw += "<td>" + result["weather"][0]["description"] + "</td>";
+                        raw += "</tr>";
+                        raw += "<tr>";
+                        raw += "<tr>";
+                        raw += "<td>Pressure</td>";
+                        raw += "<td>" + result["main"]["pressure"] + " hpa</td>";
+                        raw += "</tr>";
+                        raw += "<tr>";
+                        raw += "<td>Humidity</td>";
+                        raw += "<td>" + result["main"]["humidity"] + "%</td>";
+                        raw += "</tr>";
+                        raw += "</tbody>";
+                        raw += "</table>";
                         element.append(raw);
                     });
             }
